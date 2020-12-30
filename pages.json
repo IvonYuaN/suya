@@ -1,0 +1,75 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/tabbar"
+		},
+		{
+			"path": "pages/about",
+			"style": {
+				"navigationBarTextStyle":"white",
+				"navigationBarTitleText":"",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/index/coupons"
+		},
+		{
+			"path": "pages/menu/list"
+		},
+		{
+			"path": "pages/menu/search"
+		},
+		{
+			"path": "pages/menu/detail",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTextStyle":"white"
+			}
+			
+		},
+		{
+			"path": "pages/user/login",
+			"style": {
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/user/favorite"
+		},
+		{
+			"path": "pages/user/coupons"
+		},
+		{
+			"path": "pages/user/adslist"
+		},
+		{
+			"path": "pages/user/adsadd"
+		},
+		{
+			"path": "pages/user/history"
+		},
+		{
+			"path": "pages/user/member"
+		},
+		{
+			"path": "pages/order/list"
+		},
+		{
+			"path": "pages/order/paypal"
+		},
+		{
+			"path": "pages/order/detail"
+		},
+		{
+			"path": "pages/order/evaluate"
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#FFFFFF",
+		"backgroundTextStyle": "dark"
+	}
+}
