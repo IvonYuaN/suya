@@ -139,6 +139,7 @@
 				<view v-if="orderDetail.order_status==2" class="button" :style="'background-color:'+template.color.color5" @click="copyOrderLogistics()">复制运单信息</view>
 				<view v-if="orderDetail.order_status==2" class="button" :style="'background-color:'+template.color.color1" @click="confirmOrder()">确认收货</view>
 				<view v-if="orderDetail.order_status==3 && !orderDetail.evaluate_status" class="button" :style="'background-color:'+template.color.color1" @click="evaluateGoods()">发表评价</view>
+				<view class="button" :style="'color:#fff;background-color:'+template.color.color5+';border: none'" v-if="orderDetail.order_status===4" @click.stop="invalidOrder()">删除订单</view>
 			</view>
 		</view>
 		
@@ -337,6 +338,26 @@
 				    data: data.verification_code,
 				    success: function () {}
 				});
+			},
+			invalidOrder() {
+				let self = this;
+				let id = self.orderDetail.id;
+				uni.showModal({
+					title: '删除确认',
+					content: '删除订单后不可恢复，是否删除该订单？',
+					success(ses) {
+						if(ses.confirm){
+							self.Get(self.Url.orderInvalid, {id: id}).then(res => {
+								if(res.code === 0){
+									uni.showToast({title: '订单删除成功'});
+									setTimeout(function () {
+										uni.navigateBack();
+									}, 500);
+								}
+							});
+						}
+					}
+				})
 			},
 			confirmOrder() {
 				let self = this;

@@ -69,6 +69,7 @@
 						<view v-if="item.order_status==1 && item.delivery_type==2" class="button" :style="'background-color:'+template.color.color1" @click.stop="qrcodeTap(true, item.verification_code)">出示提货码</view>
 						<view v-if="item.order_status==2" class="button" :style="'background-color:'+template.color.color1" @click.stop="confirmOrder(item.id)">确认收货</view>
 						<view v-if="item.order_status==3 && !item.evaluate_status" class="button" @click.stop="evaluateGoods(item.id)" :style="'background-color:'+template.color.color1">发表评价</view>
+						<view class="button" :style="'color:#fff;background-color:'+template.color.color5+';border: none'" v-if="item.order_status===4" @click.stop="invalidOrder(item.id)">删除订单</view>
 					</view>
 				</view>
 			</view>
@@ -279,6 +280,23 @@
 				    data: text,
 				    success: function () {}
 				});
+			},
+			invalidOrder(id) {
+				let self = this;
+				uni.showModal({
+					title: '删除确认',
+					content: '删除订单后不可恢复，是否删除该订单？',
+					success(ses) {
+						if(ses.confirm){
+							self.Get(self.Url.orderInvalid, {id: id}).then(res => {
+								if(res.code === 0){
+									uni.showToast({title: '订单删除成功'});
+									self.getOrderList();
+								}
+							});
+						}
+					}
+				})
 			},
 			confirmOrder(id) {
 				let self = this;

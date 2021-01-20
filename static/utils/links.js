@@ -27,6 +27,7 @@ let links = {
 	'orderList': '/api/order/list',
 	'orderPaypal': '/api/order/paypal',
 	'orderDetail': '/api/order/detail',
+	'orderInvalid': '/api/order/invalid/del',
 	'orderConfirm': '/api/order/delivery/confirm',
 	'userDetails': '/api/user/money',
 	'userLevelList': '/api/user/level/list',

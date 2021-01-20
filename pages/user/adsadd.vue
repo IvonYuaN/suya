@@ -43,6 +43,7 @@
 				</view>
 			</view>
 			<view class="button">
+				<view class="saveBtn" v-if="!addressData.id" @click="getWechatAdds()" style="background-color: #07c160;">获取微信地址</view>
 				<view class="saveBtn" @click="saveAddress()" :style="'background-color:'+template.color.color1">保存地址信息</view>
 				<view class="saveBtn" v-if="addressData.id" @click="delAddress()" :style="'background-color:'+template.color.color5">删除地址信息</view>
 			</view>
@@ -65,7 +66,7 @@
 					phone: '',
 					idcard: '',
 					province: '',
-					region_id: '',
+					region_id: "110101",
 					address: '',
 					is_default: true
 				}
@@ -86,6 +87,21 @@
 			selectRegion(e) {
 				this.region = e.detail.value;
 				this.addressData.region_id = e.detail.code[2];
+			},
+			getWechatAdds() {
+				let self = this;
+				uni.chooseAddress({
+				  success(res) {
+					if(res.errMsg=="chooseAddress:ok"){
+						self.addressData.cname = res.userName;
+						self.addressData.phone = res.telNumber;
+						self.addressData.address = res.detailInfo;
+						self.region = [res.provinceName, res.cityName, res.countyName];
+					}else{
+						uni.showToast({title: '获取地址失败', icon: 'none'});
+					}
+				  }
+				})
 			},
 			saveAddress() {
 				let self = this;
